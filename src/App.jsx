@@ -4,7 +4,7 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import AddCourse from './components/AddCourse'
-import ViewCourse from './components/ViewCourse'
+import ViewCourses from './components/ViewCourses'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<AddCourse/>}/>
-        <Route path='/view' element={<ViewCourse/>}/>
+        <Route path='/view' element={<ViewCourses/>}/>
     </Routes>
     </BrowserRouter>
     </>
