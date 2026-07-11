@@ -1,34 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import NaviBar from './NaviBar'
 
-const ViewCourse = () => {
+const ViewCourses = () => {
+       const [data, changeData] = useState([])
 
-    const [data, chanagedata] = useState([
+    const fetchData = () => {
+        axios.get("https://host-demo-app.onrender.com/api/courses")
+            .then((response) => {
+                changeData(response.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
-{"course_name":"MEAN Stack","created_at":"2026-07-11T09:18:41.017000","duration":"17 Days","fee":19000.0,"id":"6a520a71f19fbee7ff0b656b","mode":"Online","trainer":"Manoj"},
-{"course_name":"Ruby Full stack  Bootcamp","created_at":"2026-07-11T09:12:15.994000","duration":"7 Days","fee":15000.0,"id":"6a5208ef3c008b2a8bdf5000","mode":"Online","trainer":"Manoj"}
-
-
-    ])
-
+    useEffect(() => {
+    fetchData()
+}, [])
   return (
     <div>
-<NaviBar/>
-  <div className="container mt-4">
+  <NaviBar/>
+ <div className="container mt-4">
                 <div className="row">
-                    <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                    <div className="col-12">
+                      
 
                         <div className="row g-4">
 
-                            {data.map((value, inderx) => {
-
+                            {data.map((value, index) => {
                                 return (
-
                                     <div
-                                        key={inderx}
-                                        className="col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4"
+                                        key={index}
+                                        className="col-12 col-md-6 col-lg-4"
                                     >
-
                                         <div className="card h-100 shadow">
 
                                             <div className="card-body d-flex flex-column">
@@ -38,27 +43,27 @@ const ViewCourse = () => {
                                                 </h5>
 
                                                 <p className="card-text">
-                                                    <b>credicted at :</b> {value.created_at}
+                                                    <b>Created At:</b> {value.created_at}
                                                 </p>
 
                                                 <p className="card-text">
-                                                    <b>duration :</b> {value.duration}
+                                                    <b>Duration:</b> {value.duration}
                                                 </p>
 
                                                 <p className="card-text">
-                                                    <b>fee :</b> {value.fee}
+                                                    <b>Fee:</b> {value.fee}
                                                 </p>
 
                                                 <p className="card-text">
-                                                    <b>id :</b> {value.id}
+                                                    <b>ID:</b> {value.id}
                                                 </p>
 
                                                 <p className="card-text">
-                                                    <b>mode :</b> {value.mode}
+                                                    <b>Mode:</b> {value.mode}
                                                 </p>
 
                                                 <p className="card-text">
-                                                    <b>trainer :</b> {value.trainer}
+                                                    <b>Trainer:</b> {value.trainer}
                                                 </p>
 
                                                 <a href="#" className="btn btn-primary mt-auto">
@@ -68,11 +73,8 @@ const ViewCourse = () => {
                                             </div>
 
                                         </div>
-
                                     </div>
-
                                 )
-
                             })}
 
                         </div>
@@ -81,9 +83,8 @@ const ViewCourse = () => {
                 </div>
             </div>
 
-
     </div>
   )
 }
 
-export default ViewCourse
+export default ViewCourses
